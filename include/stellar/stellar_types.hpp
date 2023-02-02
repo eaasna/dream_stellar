@@ -227,13 +227,10 @@ private:
 // Container for storing local alignment matches of one query sequence
 template<typename TMatch_>
 struct QueryMatches {
-    typedef typename Size<typename Source<TMatch_>::Type>::Type TSize;
-
     String<TMatch_> matches;
     bool disabled;
-    TSize lengthAdjustment;
 
-    QueryMatches() : disabled(false), lengthAdjustment(0)
+    QueryMatches() : disabled(false)
     {}
 
     bool removeOverlapsAndCompactMatches(size_t const disableThresh,
@@ -266,6 +263,8 @@ struct StellarMatch {
     typedef Align<TSequence, ArrayGaps>         TAlign;
     typedef typename Row<TAlign>::Type         TRow;
 
+    typedef typename Size<typename Source<StellarMatch>::Type>::Type TSize;
+
     static const TId INVALID_ID;
 
     TId id;         // database ID
@@ -278,7 +277,9 @@ struct StellarMatch {
     TPos end2;
     TRow row2;
 
-    StellarMatch() : id(), orientation(false), begin1(0), end1(0), begin2(0), end2(0)
+    TSize lengthAdjustment;
+
+    StellarMatch() : id(), orientation(false), begin1(0), end1(0), begin2(0), end2(0), lengthAdjustment(0)
     {}
 
     template <typename TAlign, typename TId>

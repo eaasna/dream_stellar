@@ -35,11 +35,11 @@ Constructing index...
 
 Aligning all query sequences to database sequence...
   3
-
+lengthAdjustment:
 15
-
+lengthAdjustment:
 15
-
+lengthAdjustment:
 15
   3, complement
 

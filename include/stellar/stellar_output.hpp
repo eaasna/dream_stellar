@@ -278,7 +278,7 @@ _writeMatchGff(TId const & databaseID,
     if (IsSameType<TAlphabet, Dna5>::VALUE || IsSameType<TAlphabet, Rna5>::VALUE)
     {
         file << ";eValue=" << _computeEValue(row0, row1, lengthAdjustment);
-        std::cout << "lengthAdjustment:" << std::endl << lengthAdjustment << std::endl;
+        //std::cout << "lengthAdjustment:" << std::endl << lengthAdjustment << std::endl;
     }
 
     std::stringstream cigar, mutations;
@@ -350,7 +350,7 @@ void _writeMatchesToGffFile(QueryMatches<StellarMatch<TInfix const, TQueryId> > 
         if (match.orientation != orientation)
             continue;
 
-        _writeMatchGff(match.id, id, match.orientation, queryMatches.lengthAdjustment,
+        _writeMatchGff(match.id, id, match.orientation, match.lengthAdjustment,
                        match.row1, match.row2, outputFile);
     }
 }
@@ -362,7 +362,7 @@ void _writeMatchesToTxtFile(QueryMatches<StellarMatch<TInfix const, TQueryId> > 
         if (match.orientation != orientation)
             continue;
 
-        _writeMatch(match.id, id, match.orientation, queryMatches.lengthAdjustment,
+        _writeMatch(match.id, id, match.orientation, match.lengthAdjustment,
                     match.row1, match.row2, outputFile);
     }
 }
@@ -437,10 +437,9 @@ void _postproccessLengthAdjustment(StringSet<QueryMatches<StellarMatch<TInfix co
     constexpr bool is_dna5_or_rna5 = IsSameType<TAlphabet, Dna5>::VALUE || IsSameType<TAlphabet, Rna5>::VALUE;
     if constexpr (is_dna5_or_rna5) {
         for (QueryMatches<StellarMatch<TInfix const, TQueryId>> & queryMatches : matches) {
-            for (StellarMatch<TInfix const, TQueryId> const & firstMatch : queryMatches.matches) {
-                queryMatches.lengthAdjustment = _computeLengthAdjustment(length(source(firstMatch.row1)),
-                                                                         length(source(firstMatch.row2)));
-                break;
+            for (StellarMatch<TInfix const, TQueryId> & match : queryMatches.matches) {
+                match.lengthAdjustment = _computeLengthAdjustment(length(source(match.row1)),
+                                                                  length(source(match.row2)));
             }
         }
     }
