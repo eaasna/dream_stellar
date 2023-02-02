@@ -1,0 +1,80 @@
+I/O options:
+  database file   : ref.fasta
+  query file      : query_e0.05.fasta
+  alphabet        : dna5
+  output file     : stellar_full.gff
+  output format   : gff
+
+User specified parameters:
+  minimal match length             : 10
+  maximal error rate (epsilon)     : 0.05 = (1/20)
+  maximal x-drop                   : 5
+  search forward strand            : yes
+  search reverse complement        : yes
+
+  verification strategy            : exact
+  maximal number of matches        : 50
+  duplicate removal every          : 500
+  threads                          : 1
+
+Calculated parameters:
+  k-mer length : 10
+  s^min        : 10
+  threshold    : 1
+  distance cut : 10
+  delta        : 16
+  overlap      : 0
+
+Loaded 1 query sequence.
+Loaded 3 database sequences.
+
+All matches matches resulting from your search have an E-value of: 
+        3.0168 or smaller  (match score = 1, error penalty = -2)
+
+Constructing index...
+
+Aligning all query sequences to database sequence...
+  1
+  2
+  3
+
+16
+
+16
+
+16
+
+16
+
+16
+
+16
+
+16
+
+16
+
+16
+
+16
+
+16
+
+16
+
+16
+
+16
+
+16
+
+16
+  1, complement
+  2, complement
+  3, complement
+
+16
+
+16
+
+# Eps-matches     : 18

@@ -1,0 +1,46 @@
+I/O options:
+  database file   : chr3.fasta
+  query file      : query_e0.05.fasta
+  alphabet        : dna5
+  output file     : stellar_chr3.gff
+  output format   : gff
+
+User specified parameters:
+  minimal match length             : 10
+  maximal error rate (epsilon)     : 0.05 = (1/20)
+  maximal x-drop                   : 5
+  search forward strand            : yes
+  search reverse complement        : yes
+
+  verification strategy            : exact
+  maximal number of matches        : 50
+  duplicate removal every          : 500
+  threads                          : 1
+
+Calculated parameters:
+  k-mer length : 10
+  s^min        : 10
+  threshold    : 1
+  distance cut : 10
+  delta        : 16
+  overlap      : 0
+
+Loaded 1 query sequence.
+Loaded 1 database sequence.
+
+All matches matches resulting from your search have an E-value of: 
+        1.08184 or smaller  (match score = 1, error penalty = -2)
+
+Constructing index...
+
+Aligning all query sequences to database sequence...
+  3
+
+15
+
+15
+
+15
+  3, complement
+
+# Eps-matches     : 3

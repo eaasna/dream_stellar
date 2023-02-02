@@ -222,6 +222,7 @@ private:
     std::vector<StellarComputeStatistics> _statistics; // one per database
 };
 
+//!TODO: Make sure that a QueryMatches is created for each query sequence
 ///////////////////////////////////////////////////////////////////////////////
 // Container for storing local alignment matches of one query sequence
 template<typename TMatch_>

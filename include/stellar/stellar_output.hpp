@@ -276,7 +276,10 @@ _writeMatchGff(TId const & databaseID,
     file << "," << endPosition(row1) + beginPosition(source(row1));
 
     if (IsSameType<TAlphabet, Dna5>::VALUE || IsSameType<TAlphabet, Rna5>::VALUE)
+    {
         file << ";eValue=" << _computeEValue(row0, row1, lengthAdjustment);
+        std::cout << "lengthAdjustment:" << std::endl << lengthAdjustment << std::endl;
+    }
 
     std::stringstream cigar, mutations;
     _getCigarLine(row0, row1, cigar, mutations);
