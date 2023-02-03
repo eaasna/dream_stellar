@@ -276,10 +276,7 @@ _writeMatchGff(TId const & databaseID,
     file << "," << endPosition(row1) + beginPosition(source(row1));
 
     if (IsSameType<TAlphabet, Dna5>::VALUE || IsSameType<TAlphabet, Rna5>::VALUE)
-    {
         file << ";eValue=" << _computeEValue(row0, row1, lengthAdjustment);
-        //std::cout << "lengthAdjustment:" << std::endl << lengthAdjustment << std::endl;
-    }
 
     std::stringstream cigar, mutations;
     _getCigarLine(row0, row1, cigar, mutations);
@@ -444,7 +441,6 @@ void _postproccessLengthAdjustment(uint64_t const & refLen, StringSet<QueryMatch
         for (QueryMatches<StellarMatch<TInfix const, TQueryId>> & queryMatches : matches) {
             for (StellarMatch<TInfix const, TQueryId> & firstMatch : queryMatches.matches) {
                 queryMatches.lengthAdjustment = _computeLengthAdjustment(refLen, length(source(firstMatch.row2)));
-                std::cout << refLen << '\t' << length(source(firstMatch.row2)) << std::endl;
                 break;
             }
         }
