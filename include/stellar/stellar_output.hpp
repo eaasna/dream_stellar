@@ -344,25 +344,27 @@ _writeMatch(TId const & databaseID,
 }
 
 template <typename TInfix, typename TQueryId>
-void _writeMatchesToGffFile(QueryMatches<StellarMatch<TInfix const, TQueryId> > const & queryMatches, CharString const & id, bool const orientation, std::ofstream & outputFile)
+void _writeMatchesToGffFile(QueryMatches<StellarMatch<TInfix const, TQueryId> > const & queryMatches,
+                            CharString const & id, bool const orientation, std::ofstream & outputFile)
 {
     for (StellarMatch<TInfix const, TQueryId> const & match : queryMatches.matches) {
         if (match.orientation != orientation)
             continue;
 
-        _writeMatchGff(match.id, id, match.orientation, match.lengthAdjustment,
+        _writeMatchGff(match.id, id, match.orientation, queryMatches.lengthAdjustment,
                        match.row1, match.row2, outputFile);
     }
 }
 
 template <typename TInfix, typename TQueryId>
-void _writeMatchesToTxtFile(QueryMatches<StellarMatch<TInfix const, TQueryId> > const &queryMatches, CharString const & id, bool const orientation, std::ofstream & outputFile)
+void _writeMatchesToTxtFile(QueryMatches<StellarMatch<TInfix const, TQueryId> > const &queryMatches,
+                            CharString const & id, bool const orientation, std::ofstream & outputFile)
 {
     for (StellarMatch<TInfix const, TQueryId> const & match : queryMatches.matches) {
         if (match.orientation != orientation)
             continue;
 
-        _writeMatch(match.id, id, match.orientation, match.lengthAdjustment,
+        _writeMatch(match.id, id, match.orientation, queryMatches.lengthAdjustment,
                     match.row1, match.row2, outputFile);
     }
 }
@@ -371,7 +373,8 @@ void _writeMatchesToTxtFile(QueryMatches<StellarMatch<TInfix const, TQueryId> > 
 // Calls _writeMatchGff for each match in String of matches.
 //   = Writes matches in gff format to a file.
 template <typename TInfix, typename TQueryId>
-void _writeQueryMatchesToFile(QueryMatches<StellarMatch<TInfix const, TQueryId> > const & queryMatches, CharString const & id, bool const orientation, CharString const & outputFormat, std::ofstream & outputFile)
+void _writeQueryMatchesToFile(QueryMatches<StellarMatch<TInfix const, TQueryId> > const & queryMatches,
+                              CharString const & id, bool const orientation, CharString const & outputFormat, std::ofstream & outputFile)
 {
     if (outputFormat == "gff")
         _writeMatchesToGffFile(queryMatches, id, orientation, outputFile);
@@ -383,7 +386,9 @@ void _writeQueryMatchesToFile(QueryMatches<StellarMatch<TInfix const, TQueryId> 
 // Calls _writeMatchGff for each match in StringSet of String of matches.
 //   = Writes matches in gff format to a file.
 template <typename TInfix, typename TQueryId, typename TQueryIDs>
-void _writeAllQueryMatchesToFile(StringSet<QueryMatches<StellarMatch<TInfix const, TQueryId> > > const & matches, TQueryIDs const & queryIDs, bool const orientation, CharString const & outputFormat, std::ofstream & outputFile)
+void _writeAllQueryMatchesToFile(StringSet<QueryMatches<StellarMatch<TInfix const, TQueryId> > > const & matches,
+                                 TQueryIDs const & queryIDs, bool const orientation,
+                                 CharString const & outputFormat, std::ofstream & outputFile)
 {
     for (size_t i = 0; i < length(matches); i++) {
         QueryMatches<StellarMatch<TInfix const, TQueryId>> const & queryMatches = value(matches, i);
@@ -430,16 +435,17 @@ void _writeDisabledQueriesToFastaFile(std::vector<size_t> const & disabledQueryI
 }
 
 template <typename TInfix, typename TQueryId>
-void _postproccessLengthAdjustment(StringSet<QueryMatches<StellarMatch<TInfix const, TQueryId> > > & matches)
+void _postproccessLengthAdjustment(uint64_t const & refLen, StringSet<QueryMatches<StellarMatch<TInfix const, TQueryId> > > & matches)
 {
     using TAlphabet = typename Value<TInfix>::Type;
 
     constexpr bool is_dna5_or_rna5 = IsSameType<TAlphabet, Dna5>::VALUE || IsSameType<TAlphabet, Rna5>::VALUE;
     if constexpr (is_dna5_or_rna5) {
         for (QueryMatches<StellarMatch<TInfix const, TQueryId>> & queryMatches : matches) {
-            for (StellarMatch<TInfix const, TQueryId> & match : queryMatches.matches) {
-                match.lengthAdjustment = _computeLengthAdjustment(length(source(match.row1)),
-                                                                  length(source(match.row2)));
+            for (StellarMatch<TInfix const, TQueryId> & firstMatch : queryMatches.matches) {
+                queryMatches.lengthAdjustment = _computeLengthAdjustment(refLen, length(source(firstMatch.row2)));
+                std::cout << refLen << '\t' << length(source(firstMatch.row2)) << std::endl;
+                break;
             }
         }
     }
