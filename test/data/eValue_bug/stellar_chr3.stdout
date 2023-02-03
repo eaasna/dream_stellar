@@ -1,5 +1,5 @@
 I/O options:
-  database file   : chr3.fasta
+  database file   : ref_chr3.fasta
   query file      : query_e0.05.fasta
   alphabet        : dna5
   output file     : stellar_chr3.gff
@@ -26,14 +26,16 @@ Calculated parameters:
   overlap      : 0
 
 Loaded 1 query sequence.
-Loaded 1 database sequence.
+Loaded 3 database sequences.
 
 All matches matches resulting from your search have an E-value of: 
-        1.08184 or smaller  (match score = 1, error penalty = -2)
+        3.0168 or smaller  (match score = 1, error penalty = -2)
 
 Constructing index...
 
 Aligning all query sequences to database sequence...
+  1
+  2
   3
 
 15
@@ -41,6 +43,54 @@ Aligning all query sequences to database sequence...
 15
 
 15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+
+15
+  1, complement
+  2, complement
   3, complement
 
-# Eps-matches     : 3
+16
+
+# Eps-matches     : 26
