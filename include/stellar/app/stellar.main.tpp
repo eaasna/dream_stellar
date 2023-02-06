@@ -409,13 +409,13 @@ _checkUniqueId(std::set<TId> & uniqueIds, TId const & id)
 ///////////////////////////////////////////////////////////////////////////////
 // Imports sequences from a file,
 //  stores them in the StringSet seqs and their identifiers in the StringSet ids
-template <typename TSequence, typename TId>
+template <typename TSequence, typename TId, typename TSize>
 inline bool
 _importSequences(CharString const & fileName,
                  CharString const & name,
                  StringSet<TSequence> & seqs,
                  StringSet<TId> & ids,
-                 uint64_t & seqLen)
+                 TSize & seqLen)
 {
     SeqFileIn inSeqs;
     if (!open(inSeqs, (toCString(fileName))))
@@ -452,13 +452,13 @@ _importSequences(CharString const & fileName,
 ///////////////////////////////////////////////////////////////////////////////
 // Imports the sequence of interest from a file,
 // stores it in the StringSet seqs and their identifiers in the StringSet ids
-template <typename TSequence, typename TId>
+template <typename TSequence, typename TId, typename TSize>
 inline bool
 _importSequenceOfInterest(CharString const & fileName,
                           unsigned const & sequenceIndex,
                           StringSet<TSequence> & seqs,
                           StringSet<TId> & ids,
-                          uint64_t & seqLen)
+                          TSize & seqLen)
 {
     SeqFileIn inSeqs;
     if (!open(inSeqs, (toCString(fileName))))
@@ -517,7 +517,8 @@ int mainWithOptions(StellarOptions & options, String<TAlphabet>)
     StringSet<TSequence> queries;
     StringSet<CharString> queryIDs;
 
-    uint64_t queryLen{0};   // does not get populated currently
+    using TSize = decltype(length(queries[0]));
+    TSize queryLen{0};   // does not get populated currently
     //!TODO: split query sequence
     bool const queriesSuccess = stellar_time.input_queries_time.measure_time([&]()
     {
@@ -530,7 +531,7 @@ int mainWithOptions(StellarOptions & options, String<TAlphabet>)
     StringSet<TSequence> databases;
     StringSet<CharString> databaseIDs;
 
-    uint64_t refLen{0};
+    TSize refLen{0};
     bool const databasesSuccess = stellar_time.input_databases_time.measure_time([&]()
     {
         if (!options.prefilteredSearch)
@@ -542,7 +543,7 @@ int mainWithOptions(StellarOptions & options, String<TAlphabet>)
         return 1;
 
     std::cout << std::endl;
-    stellar::app::_writeMoreCalculatedParams(options, databases, queries);
+    stellar::app::_writeMoreCalculatedParams(options, refLen, queries);
 
     // open output files
     std::ofstream outputFile(toCString(options.outputFile), ::std::ios_base::out | ::std::ios_base::app);
