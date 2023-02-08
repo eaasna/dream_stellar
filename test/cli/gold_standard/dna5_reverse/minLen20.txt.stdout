@@ -1,8 +1,8 @@
 I/O options:
-  database file   : ../../512_simSeq1_5e-2.fa
-  query file      : ../../512_simSeq2_5e-2.fa
+  database file   : 512_simSeq1_5e-2.fa
+  query file      : 512_simSeq2_5e-2.fa
   alphabet        : dna5
-  output file     : minLen20.txt
+  output file     : dna5_reverse/minLen20.txt
   output format   : txt
 
 User specified parameters:
@@ -42,53 +42,3 @@ Aligning all query sequences to database sequence...
 # Eps-matches     : 97
 Longest eps-match : 23
 Avg match length  : 20
-Running time: 12855ms
- * Stellar Application Time: 12855ms
-    + File Input Queries Time: 64ms
-    + File Input Databases Time: 55ms
-    + SwiftFilter Construction Time: 156ms
-    + Stellar Forward Strand Time: 0ms
-       + Prefiltered Stellar Time (Forward): 0ms
-          + Swift Filter Time (Forward): 0ms
-          + Seed Verification Time (Forward): 0ms
-             + Find Next Local Alignment Time (Forward): 0ms
-             + Split At X-Drops Time (Forward): 0ms
-             + Extension Time (Forward): 0ms
-                + Extend Seed Time (Forward): 0ms
-                + Best Extension Time (Forward): 0ms
-                   + Banded Needleman-Wunsch Time (Forward): 0ms
-                      + Banded Needleman-Wunsch (Left Extension) Time (Forward): 0ms
-                      + Banded Needleman-Wunsch (Right Extension) Time (Forward): 0ms
-                   + Longest EPS Match Time (Forward): 0ms
-                   + Construct Alignment Time (Forward): 0ms
-                   = total time: 0ms
-                = total time: 0ms
-             = total time: 0ms
-          = total time: 0ms
-       + Post-Process Eps-Matches Time (Forward): 0ms
-       + File Output Eps-Matches Time (Forward): 0ms
-       = total time: 0ms
-    + Database Reverse Complement Time: 15ms
-    + Stellar Reverse Strand Time: 12553ms
-       + Prefiltered Stellar Time (Reverse): 0ms
-          + Swift Filter Time (Reverse): 5356ms
-          + Seed Verification Time (Reverse): 7130ms
-             + Find Next Local Alignment Time (Reverse): 3847ms
-             + Split At X-Drops Time (Reverse): 266ms
-             + Extension Time (Reverse): 2930ms
-                + Extend Seed Time (Reverse): 1584ms
-                + Best Extension Time (Reverse): 1137ms
-                   + Banded Needleman-Wunsch Time (Reverse): 1065ms
-                      + Banded Needleman-Wunsch (Left Extension) Time (Reverse): 557ms
-                      + Banded Needleman-Wunsch (Right Extension) Time (Reverse): 505ms
-                   + Longest EPS Match Time (Reverse): 48ms
-                   + Construct Alignment Time (Reverse): 1ms
-                   = total time: 1115ms
-                = total time: 2721ms
-             = total time: 7044ms
-          = total time: 12486ms
-       + Post-Process Eps-Matches Time (Reverse): 1ms
-       + File Output Eps-Matches Time (Reverse): 4ms
-       = total time: 6ms
-    + File Output Disabled Queries Time: 0ms
-    = total time: 12845ms
