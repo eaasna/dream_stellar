@@ -440,7 +440,7 @@ void _postproccessLengthAdjustment(uint64_t const & refLen, StringSet<QueryMatch
     if constexpr (is_dna5_or_rna5) {
         for (QueryMatches<StellarMatch<TInfix const, TQueryId>> & queryMatches : matches) {
             for (StellarMatch<TInfix const, TQueryId> & firstMatch : queryMatches.matches) {
-                queryMatches.lengthAdjustment = _computeLengthAdjustment(refLen, length(source(firstMatch.row2)));
+                queryMatches.lengthAdjustment = _computeLengthAdjustment<uint64_t>(refLen, length(source(firstMatch.row2)));
                 break;
             }
         }
